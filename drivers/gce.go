@@ -1,16 +1,16 @@
 package drivers
 
 import (
+	"code.google.com/p/goauth2/oauth"
+	compute "code.google.com/p/google-api-go-client/compute/v1"
 	"errors"
 	"fmt"
 	"github.com/skratchdot/open-golang/open"
+	"log"
 	"net"
 	"net/http"
 	"strings"
 	"time"
-
-	"code.google.com/p/goauth2/oauth"
-	compute "code.google.com/p/google-api-go-client/compute/v1"
 )
 
 const (
@@ -24,6 +24,7 @@ type GCECoreClient struct {
 	cache      *CredCache
 	region     string
 	project_id string
+	debug      bool
 }
 
 func GCEGetClient(project string, region string, cache_path string) (*GCECoreClient, error) {
@@ -96,6 +97,7 @@ func GCEGetClient(project string, region string, cache_path string) (*GCECoreCli
 		cache:      cache,
 		region:     region,
 		project_id: cache.GoogProject,
+		debug:      false,
 	}, nil
 }
 
@@ -198,7 +200,14 @@ func (c GCECoreClient) Terminate(project string) error {
 	if err != nil {
 		return err
 	}
+
+	if c.debug {
+		log.Printf("Delete Instances: %v \n", instances)
+	}
 	for _, instance := range instances.Items {
+		if c.debug {
+			log.Printf("Delete Instance: %v \n", instance)
+		}
 		_, err := c.service.Instances.Delete(c.project_id, c.region, instance.Name).Do()
 		if err != nil {
 			return err
