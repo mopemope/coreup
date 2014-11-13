@@ -13,7 +13,7 @@ import (
 	compute "code.google.com/p/google-api-go-client/compute/v1"
 )
 
-const defaultGCERegion = "us-central1-a"
+const defaultGCERegion = "asia-east1-c"
 
 type GCECoreClient struct {
 	service    *compute.Service
