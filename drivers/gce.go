@@ -146,7 +146,7 @@ func (c GCECoreClient) Run(project string, channel string, region string, size s
 					Type:       "PERSISTENT",
 					Mode:       "READ_WRITE",
 					InitializeParams: &compute.AttachedDiskInitializeParams{
-						SourceImage: "https://www.googleapis.com/compute/v1/projects/coreos-coreup/global/images/coreos-v298-0-0",
+						SourceImage: "https://www.googleapis.com/compute/v1/projects/coreos-cloud/global/images/coreos-alpha-494-0-0-v20141108",
 					},
 				},
 			},
