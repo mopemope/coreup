@@ -1,3 +1,5 @@
+coreup mopemope edition
+
 ```
 $ ./coreup -help
 Usage of ./coreup:
@@ -11,10 +13,3 @@ Usage of ./coreup:
   -size="m1.medium": size of instance
 ```
 
-Only supports ec2 for now. 
-
-```
-go get github.com/polvi/coreup
-... place a cloud-config.yml in your working directory ...
-coreup -num 3
-```
