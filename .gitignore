@@ -1,3 +1,5 @@
 coreup
 *swp
 cloud-config.yml
+Godeps/*
+!Godeps/Godeps.json
