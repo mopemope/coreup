@@ -13,9 +13,11 @@ import (
 	compute "code.google.com/p/google-api-go-client/compute/v1"
 )
 
-const defaultGCERegion = "asia-east1-c"
-const defaultGCESize = "n1-standard-1"
-const SourceImage = "https://www.googleapis.com/compute/v1/projects/coreos-cloud/global/images/coreos-alpha-494-0-0-v20141108"
+const (
+	defaultGCERegion = "asia-east1-c"
+	defaultGCESize   = "n1-standard-1"
+	SourceImage      = "https://www.googleapis.com/compute/v1/projects/coreos-cloud/global/images/coreos-alpha-494-0-0-v20141108"
+)
 
 type GCECoreClient struct {
 	service    *compute.Service
