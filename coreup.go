@@ -35,7 +35,7 @@ var (
 	provider    = flag.String("provider", "ec2", "cloud or provider to launch instance in")
 	region      = flag.String("region", "", "region to launch instance in")
 	action      = flag.String("action", "run", "run, terminate, list")
-	size        = flag.String("size", "m1.medium", "size of instance")
+	size        = flag.String("size", "n1-standard-1", "size of instance")
 	num         = flag.Int("num", 1, "number of instances to launch like this")
 	block       = flag.Bool("block-until-ready", true, "tell run commands to wait until machines are up to return")
 

@@ -14,6 +14,8 @@ import (
 )
 
 const defaultGCERegion = "asia-east1-c"
+const defaultGCESize = "n1-standard-1"
+const SourceImage = "https://www.googleapis.com/compute/v1/projects/coreos-cloud/global/images/coreos-alpha-494-0-0-v20141108"
 
 type GCECoreClient struct {
 	service    *compute.Service
@@ -133,12 +135,19 @@ func (c GCECoreClient) waitForOp(op *compute.Operation, zone string) error {
 func (c GCECoreClient) Run(project string, channel string, region string, size string, num int, block bool, cloud_config string, image string) error {
 	prefix := "https://www.googleapis.com/compute/v1/projects/" + c.project_id
 	time := time.Now().Unix()
+	if size == "" {
+		size = defaultGCESize
+	}
+	if region == "" {
+		region = defaultGCERegion
+	}
+
 	for i := 0; i < num; i++ {
 		name := fmt.Sprintf("%s-%d-%d", project, time, i)
 		instance := &compute.Instance{
 			Name:        name,
 			Description: project,
-			MachineType: prefix + "/zones/us-central1-a/machineTypes/n1-standard-1",
+			MachineType: prefix + "/zones/" + region + "/machineTypes/" + size,
 			Disks: []*compute.AttachedDisk{
 				{
 					AutoDelete: true,
@@ -146,7 +155,8 @@ func (c GCECoreClient) Run(project string, channel string, region string, size s
 					Type:       "PERSISTENT",
 					Mode:       "READ_WRITE",
 					InitializeParams: &compute.AttachedDiskInitializeParams{
-						SourceImage: "https://www.googleapis.com/compute/v1/projects/coreos-cloud/global/images/coreos-alpha-494-0-0-v20141108",
+						SourceImage: SourceImage,
+						DiskSizeGb:  10,
 					},
 				},
 			},
