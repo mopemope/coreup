@@ -16,7 +16,7 @@ import (
 const (
 	defaultGCERegion = "asia-east1-c"
 	defaultGCESize   = "n1-standard-1"
-	SourceImage      = "https://www.googleapis.com/compute/v1/projects/coreos-cloud/global/images/coreos-alpha-494-0-0-v20141108"
+	SourceImage      = "https://www.googleapis.com/compute/v1/projects/coreos-cloud/global/images/coreos-stable-494-4-0-v20141204"
 )
 
 type GCECoreClient struct {
@@ -160,7 +160,7 @@ func (c GCECoreClient) Run(project string, channel string, region string, size s
 					Mode:       "READ_WRITE",
 					InitializeParams: &compute.AttachedDiskInitializeParams{
 						SourceImage: SourceImage,
-						DiskSizeGb:  10,
+						DiskSizeGb:  20,
 					},
 				},
 			},
